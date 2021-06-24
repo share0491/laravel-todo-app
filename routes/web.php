@@ -51,6 +51,7 @@ Route::get('authors/{author:username}', function(User $author){
 
 });
 
+
 Route::middleware(['auth:sanctum', 'verified'])->group(function(){
     Route::get('/dashboard',[TasksController::class, 'index'])->name('dashboard');
 
