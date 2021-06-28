@@ -18,7 +18,9 @@ class Post extends Model
         //Post::newQuery()->filter()
 
         $query->when($filters['search'] ?? false, function($query, $search){
-            $query->where('title', 'like', '%' . $search .'%')->orWhere('excerpt', 'like', '%' . $search . '%');
+            $query->where(function($query) use ($search) {
+                $query->where('title', 'like', '%' . $search .'%')->orWhere('excerpt', 'like', '%' . $search . '%');
+            });
         });
 
         $query->when($filters['category'] ?? false, function($query, $category){
