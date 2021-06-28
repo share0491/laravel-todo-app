@@ -27,6 +27,12 @@ class Post extends Model
             });
         });
 
+        $query->when($filters['author'] ?? false, function($query, $author){
+            $query->whereHas('author', function($query) use ($author){
+                $query->where('username', $author);
+            });
+        });
+
     }
     public function category(){
         return $this->belongsTo(Category::class);
